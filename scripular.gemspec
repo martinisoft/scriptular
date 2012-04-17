@@ -1,18 +1,18 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "graffiti/version"
+require "scriptular/version"
 
 Gem::Specification.new do |s|
-  s.name        = "graffiti"
-  s.version     = Graffiti::VERSION
+  s.name        = "scriptular"
+  s.version     = Scriptular::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Aaron Kalin"]
   s.email       = ["akalin@martinisoftware.com"]
-  s.homepage    = "http://www.rubyexpressions.com/"
+  s.homepage    = "http://scriptular.com/"
   s.summary     = %q{Regular Expressions are an artform}
   s.description = %q{Test your Regular Expressions locally}
 
-  s.rubyforge_project = "graffiti"
+  s.rubyforge_project = "scriptular"
   s.add_development_dependency "rspec", "2.6.0"
   s.add_development_dependency "aruba", "~> 0.4.6"
   s.add_development_dependency "shotgun", "0.9"

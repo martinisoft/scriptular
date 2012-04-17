@@ -1,18 +1,18 @@
 #!/usr/bin/env ruby
 
 begin
-  require "graffiti"
+  require "scriptular"
 rescue LoadError => e
   $LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
-  require "graffiti"
+  require "scriptular"
 end
 
 require 'trollop'
 
 opts = Trollop::options do
-  version "#{Graffiti::VERSION}"
+  version "#{Scriptular::VERSION}"
   banner <<-EOS
-  Graffiti is a local Regular Expressions testing system.
+  Scriptular is a local Regular Expressions testing system.
   EOS
 
   opt :port, "Port to bind to", :default => 8080
@@ -24,21 +24,21 @@ def symlink_pow
   pow = ENV['HOME'] + '/.pow'
   project_root = File.expand_path(File.dirname(File.dirname(__FILE__)))
   if File.exists?(pow)
-    if File.exists?("#{pow}/graffiti")
+    if File.exists?("#{pow}/scriptular")
       puts "Symlink already exists"
     else
-      `ln -s #{project_root} #{pow}/graffiti` if File.exists?(pow)
-      puts "Symlink created at #{pow}/graffiti"
+      `ln -s #{project_root} #{pow}/scriptular` if File.exists?(pow)
+      puts "Symlink created at #{pow}/scriptular"
     end
-    puts "Visit http://graffiti.dev in your browser"
+    puts "Visit http://scriptular.dev in your browser"
   else
     puts "Can't find POW directory"
-    Graffiti::Server.start("0.0.0.0", opts[:port])
+    Scriptular::Server.start("0.0.0.0", opts[:port])
   end
 end
 
 if opts[:link_pow]
   symlink_pow
 else
-  Graffiti::Server.start("0.0.0.0", opts[:port])
+  Scriptular::Server.start("0.0.0.0", opts[:port])
 end

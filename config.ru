@@ -3,6 +3,6 @@ require 'bundler/setup'
 Bundler.require(:default)
 
 $LOAD_PATH.unshift(::File.expand_path('lib', ::File.dirname(__FILE__)))
-require 'graffiti'
+require 'scripular'
 
-run Graffiti::Server
+run Scriptular::Server

@@ -1,4 +1,4 @@
-require File.expand_path('../../../lib/graffiti', __FILE__)
+require File.expand_path('../../../lib/scriptular', __FILE__)
 require 'aruba/cucumber'
 require 'capybara/cucumber'
-Capybara.app = Graffiti::Server
+Capybara.app = Scriptular::Server

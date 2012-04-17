@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'haml'
 require 'sass'
 
-module Graffiti
+module Scriptular
   class Server < Sinatra::Base
     dir = File.dirname(File.expand_path(__FILE__))
 
@@ -10,8 +10,8 @@ module Graffiti
     set :public, "#{dir}/public"
     set :logging, false
 
-    get '/graffiti.css' do
-      scss :graffiti
+    get '/scriptular.css' do
+      scss :scriptular
     end
 
     get '/' do
@@ -36,7 +36,7 @@ module Graffiti
     end
 
     def self.start(host, port)
-      Graffiti::Server.run! :host => host, :port => port
+      Scriptular::Server.run! :host => host, :port => port
     end
   end
 end
