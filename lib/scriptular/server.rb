@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'haml'
 require 'sass'
+require 'coffee-script'
 
 module Scriptular
   class Server < Sinatra::Base
@@ -12,6 +13,14 @@ module Scriptular
 
     get '/scriptular.css' do
       scss :scriptular
+    end
+
+    get '/application.js' do
+      coffee :application
+    end
+
+    get '/spine.js' do
+      coffee :spine
     end
 
     get '/' do

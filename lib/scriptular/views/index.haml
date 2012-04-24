@@ -1,51 +1,158 @@
-!!!
-/[if lt IE 7] <html class="no-js ie6 oldie" lang="en">
-/[if IE 7] <html class="no-js ie7 oldie" lang="en">
-/[if IE 8] <html class="no-js ie8 oldie" lang="en">
-/ [if gt IE 8]><!
-%html.no-js{:lang => "en"}
-  / <![endif]
+!!! 5
+%html
   %head
-    %meta{:charset => "utf-8"}
     %title Scriptular
-    %meta{:content => "Play with Regular Expressions the fun way!", :name => "description"}/
-    %meta{:content => "Aaron Kalin", :name => "author"}/
-    %link{ :rel => "stylesheet", :href => "/scriptular.css" }
-    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
-    %script{ :type => "text/javascript", :src => "/jquery-1.6.1.min.js" }
+    %link{href: "/scriptular.css", rel: "stylesheet", type: "text/css"}
+    %script{src: "/javascripts/jquery-1.7.2.min.js", type: "text/javascript"}
+    %script{src: "/spine.js", type: "text/javascript"}
+    %script{src: "/application.js", type: "text/javascript"}
     :javascript
-      function check_regex() {
-        var regexVal = $('#regex').val(),
-            subjectVal = $('#subject').val();
-        $.post("/regex", { regex : regexVal, subject : subjectVal },
-          function(data) {
-            $('#result').html(data);
-          }
-        );
-      }
-
-      $(document).ready(function() {
-        $("#regex,#subject").keyup(function(e){
-          e.preventDefault();
-          check_regex();
-        });
+      $(function() {
+        new App();
       });
-  %body
-    %section#wrap.clearfix
-      %header
+    %body
+    #container
+      #header
         %h1 Scriptular
-      %section#content.main
-        %form{ :action => "/regex", :id => "regex_form", :method => "post" }
-          %fieldset
-            %label Regex (What you are searching for)
-            %input#regex{ :name => "regex", :size => "80", :type => "text", :placeholder => "insert your regex here" }
-            %label Subject (What you are matching against)
-            %textarea#subject{ :name => "subject", :cols => "60", :rows => "10" }
-          %h2 Result:
-          #result
-      %footer
-        Scriptular is an open source project by
-        %a{:href => "https://twitter.com/jonmagic"} @jonmagic
-        |
-        Source code available on
-        %a{:href => "https://github.com/martinisoft/scriptular"} github
+        %h2 A javascript regular expression editor
+      #main
+        #expression
+          %h2 Regular Expression:
+          \/
+          %input{name: "expression"}>/
+          \/
+          %input{name: "option"}/
+        #test_strings
+          %h2 Test Strings:
+          %textarea{name: "test_strings"}
+        #intro
+          %p
+            Scriptular is a javascript regular expression editor. Inspired by
+            %a{href: "http://rubular.com", target: "_blank"} Rubular
+            it gives you a simple way to test javascript regular expressions as you write them.
+          %p
+            Start by entering a regular expression and then a test string. Or give this
+            = succeed "." do
+              %a#example{href: "#"} example a try
+          %p
+            %a{href: "https://developer.mozilla.org/en/JavaScript/Guide/Regular_Expressions", target: "_blank"} Learn more
+            about regular expressions in javascript.
+        #error
+          %p No Matches
+        #output
+          %h2 Match Results:
+          %ul#results
+          %h2 Match Groups:
+          %ul#groups
+          %h2 Share Link:
+          %ul#shares
+            %li
+              %a#share_link{href: ""} Share this regular expression
+      #quick_reference
+        .scrollable
+          %h2 Modifiers:
+          %table
+            %tr
+              %td.regex i
+              %td Perform case-insensitive matching
+            %tr
+              %td.regex g
+              %td Perform a global match
+          %h2 Brackets:
+          %table
+            %tr
+              %td.regex [abc]
+              %td Match a single character a, b, or c
+            %tr
+              %td.regex [^abc]
+              %td Match any character except a, b, or c
+            %tr
+              %td.regex [A-z]
+              %td Match any character from uppercase A to lowercase z
+            %tr
+              %td.regex (ab|cd|ef)
+              %td Match either ab, cd, or ef
+            %tr
+              %td.regex (...)
+              %td Capture anything enclosed
+          %h2 Metacharacters
+          %table
+            %tr
+              %td.regex ^
+              %td Start of line
+            %tr
+              %td.regex $
+              %td End of line
+            %tr
+              %td.regex .
+              %td Match any character
+            %tr
+              %td.regex \w
+              %td Match a word chracter
+            %tr
+              %td.regex \W
+              %td Match a non-word character
+            %tr
+              %td.regex \d
+              %td Match a digit
+            %tr
+              %td.regex \D
+              %td Match any non-digit character
+            %tr
+              %td.regex \s
+              %td Match a whitespace character
+            %tr
+              %td.regex \S
+              %td Match a non-whitespace character
+            %tr
+              %td.regex \b
+              %td Match character at the beginning or end of a word
+            %tr
+              %td.regex \B
+              %td Match a character not at beginning or end of a word
+            %tr
+              %td.regex \0
+              %td Match a NUL character
+            %tr
+              %td.regex \t
+              %td Match a tab character
+            %tr
+              %td.regex \xxx
+              %td Match a character specified by octal number xxx
+            %tr
+              %td.regex \xdd
+              %td Match a character specified by hexidecimal number dd
+            %tr
+              %td.regex \uxxxx
+              %td Match a Unicode character specified by hexidecimal number xxxx
+          %h2 Quantifiers
+          %table
+            %tr
+              %td.regex n+
+              %td Match at least one n
+            %tr
+              %td.regex n*
+              %td Match zero or more n's
+            %tr
+              %td.regex n?
+              %td Match zero or one n
+            %tr
+              %td.regex n{X}
+              %td Match sequence of X n's
+            %tr
+              %td.regex n{X,Y}
+              %td Match sequence of X to Y n's
+            %tr
+              %td.regex n{X,}
+              %td Match sequence of X or more n's
+      #footer
+        %p
+          Made by
+          = succeed "." do
+            %a{href: "http://theprogrammingbutler.com"} Hoyt
+          To contribute or report an issue visit
+          = succeed "." do
+            %a{href: "https://github.com/jonmagic/scriptular"} GitHub
+          Follow me on
+          = succeed "." do
+            %a{href: "http://twitter.com/jonmagic"} Twitter
