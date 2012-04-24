@@ -45,11 +45,16 @@ to make this work.
 Runtime Dependencies
 --------------------
 
+* Coffee-Script: A little language that compiles into Javascript
 * Sinatra: Web application framework
 * Haml: HTML Template language
 * Sass: Stylesheet markup language (Specifically, SCSS)
 * Thin: Super fast web server
 * Trollop: Command line options for Ruby apps
+
+*A Note About Coffee*: The Coffeescript gem loads execjs, which will complain
+if you do not have a proper javascript compiler installed.  If you already have
+Node.js, you're good, if not then see [this page](https://github.com/sstephenson/execjs) for details.
 
 Development Dependencies
 ------------------------
