@@ -4,7 +4,7 @@ Scriptular
 Scriptular is a local Regular Expression tester and learning tool for
 beginners.
 
-[![Build Status](http://travis-ci.org/martinisoft/scriptular.png)](http://travis-ci.org/martinisoft/scriptular)
+[![Build Status](https://secure.travis-ci.org/martinisoft/scriptular.png?branch=master)](http://travis-ci.org/martinisoft/scriptular)
 
 Why?
 ----
